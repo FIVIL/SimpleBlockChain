@@ -8,6 +8,7 @@ namespace NoobChain
     {
         Valid,
         NotValidCurrent,
-        NotValidPervious
+        NotValidPervious,
+        HasntMinedYet
     }
 }

@@ -73,6 +73,7 @@ namespace NoobChain
         }
         public static ValidationTypes IsChainValid()
         {
+            string hashTarget = new string(new char[difficulty]).Replace('\0', '0');
             Block curr, prev;
             for (int i = 1; i < Blocks.Count; i++)
             {
@@ -80,6 +81,7 @@ namespace NoobChain
                 prev = Blocks[i - 1];
                 if (!curr.Hash.Equals(curr.GetHashString())) return ValidationTypes.NotValidCurrent;
                 if (!prev.Hash.Equals(curr.PreviousHash)) return ValidationTypes.NotValidPervious;
+                if (!curr.Hash.Substring(0, difficulty).Equals(hashTarget)) return ValidationTypes.HasntMinedYet;
             }
             return ValidationTypes.Valid;
         }
