@@ -29,9 +29,10 @@ namespace NoobChain
         }
         static NoobChaiN()
         {
-            difficulty = 5;
+            difficulty = 3;
             settingDifficulty = false;
             Genesis = new Block("Genesis", Guid.NewGuid().ToString().ApplyBlacke2());
+            //Genesis = new Block("Genesis", "0");
             FirstBlockHash = Genesis.PreviousHash;
             Blocks = new List<Block>()
             {
@@ -49,6 +50,7 @@ namespace NoobChain
         private static void AddBlock()
 
         {
+            Prev.Miner(Difficulty);
             var block = new Block("Block number: " + (Blocks.Count), Prev.Hash);
             Blocks.Add(block);
             Prev = block;
@@ -84,11 +86,6 @@ namespace NoobChain
                 if (!curr.Hash.Substring(0, difficulty).Equals(hashTarget)) return ValidationTypes.HasntMinedYet;
             }
             return ValidationTypes.Valid;
-        }
-        public async static void Mine(int BlockNumber)
-        {
-            Console.WriteLine("Trying to mine...");
-            await Blocks[BlockNumber].Miner(Difficulty);
         }
     }
 }

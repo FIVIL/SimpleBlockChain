@@ -34,21 +34,19 @@ namespace NoobChain
         {
             return (Data + PreviousHash + TimeStamp.ToBinary().ToString() + Nonce).ApplyBlacke2();
         }
-        public async Task Miner(int difficulty)
+        public void Miner(int difficulty)
         {
-             await Task.Run(() =>
+
+            Stopwatch SW = new Stopwatch();
+            SW.Start();
+            string target = new string(new char[difficulty]).Replace('\0', '0');
+            while (!Hash.Substring(0, difficulty).Equals(target))
             {
-                Stopwatch SW = new Stopwatch();
-                SW.Start();
-                string target = new string(new char[difficulty]).Replace('\0', '0');
-                while (!Hash.Substring(0, difficulty).Equals(target))
-                {
-                    Nonce++;
-                    Hash = GetHashString();
-                }
-                SW.Stop();
-                Console.WriteLine("Mining is done!!! total time: " + SW.ElapsedMilliseconds);
-            });
+                Nonce++;
+                Hash = GetHashString();
+            }
+            SW.Stop();
+            Console.WriteLine("Mined!!! total time: " + SW.ElapsedMilliseconds + " new Hash: " + Hash);
         }
     }
 }
