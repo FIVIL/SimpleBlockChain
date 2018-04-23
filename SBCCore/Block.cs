@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NoobChain
 {
@@ -32,15 +34,21 @@ namespace NoobChain
         {
             return (Data + PreviousHash + TimeStamp.ToBinary().ToString() + Nonce).ApplyBlacke2();
         }
-        public void Miner(int difficulty)
+        public async Task Miner(int difficulty)
         {
-            string target = new string(new char[difficulty]).Replace('\0', '0');
-            while (!Hash.Substring(0, difficulty).Equals(target))
+             await Task.Run(() =>
             {
-                Nonce++;
-                Hash = GetHashString();
-            }
-            Console.WriteLine("block mined :" + Hash);
+                Stopwatch SW = new Stopwatch();
+                SW.Start();
+                string target = new string(new char[difficulty]).Replace('\0', '0');
+                while (!Hash.Substring(0, difficulty).Equals(target))
+                {
+                    Nonce++;
+                    Hash = GetHashString();
+                }
+                SW.Stop();
+                Console.WriteLine("Mining is done!!! total time: " + SW.ElapsedMilliseconds);
+            });
         }
     }
 }

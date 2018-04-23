@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -81,6 +82,11 @@ namespace NoobChain
                 if (!prev.Hash.Equals(curr.PreviousHash)) return ValidationTypes.NotValidPervious;
             }
             return ValidationTypes.Valid;
+        }
+        public async static void Mine(int BlockNumber)
+        {
+            Console.WriteLine("Trying to mine...");
+            await Blocks[BlockNumber].Miner(Difficulty);
         }
     }
 }
