@@ -10,9 +10,28 @@ namespace NoobChain
         private static List<Block> Blocks;
         private static Block Genesis;
         private static Block Prev;
+        public static string FirstBlockHash { get; private set; }
+        private static int difficulty;
+        private static bool settingDifficulty;
+        public static int Difficulty
+        {
+            get => difficulty;
+            set
+            {
+                if (!settingDifficulty)
+                {
+                    difficulty = value;
+                    settingDifficulty = true;
+                }
+                else { }
+            }
+        }
         static NoobChaiN()
         {
+            difficulty = 5;
+            settingDifficulty = false;
             Genesis = new Block("Genesis", Guid.NewGuid().ToString().ApplyBlacke2());
+            FirstBlockHash = Genesis.PreviousHash;
             Blocks = new List<Block>()
             {
                Genesis
