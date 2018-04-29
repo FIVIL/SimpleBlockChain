@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBlockChain", "SimpleBlockChain\SimpleBlockChain.csproj", "{6A1D93D7-4E8E-46BF-9C1F-9310242719CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleBlockChain", "SimpleBlockChain\SimpleBlockChain.csproj", "{6A1D93D7-4E8E-46BF-9C1F-9310242719CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBCCore", "SBCCore\SBCCore.csproj", "{C469D79C-AFA2-4A16-A071-6A8A3808B2F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SBCCore", "SBCCore\SBCCore.csproj", "{C469D79C-AFA2-4A16-A071-6A8A3808B2F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackE2Hash", "BlackE2Hash\BlackE2Hash.csproj", "{71F6B04E-BED2-4937-98F6-FC699E3FBDC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackE2Hash", "BlackE2Hash\BlackE2Hash.csproj", "{71F6B04E-BED2-4937-98F6-FC699E3FBDC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

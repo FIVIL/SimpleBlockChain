@@ -12,7 +12,7 @@ namespace NoobChain
         public string PreviousHash { get; private set; }
         public string Data { get; private set; }
         public DateTime TimeStamp { get; }
-        public int Nonce { get; private set; }
+        public uint Nonce { get; private set; }
         private static Random rnd;
         static Block()
         {
@@ -23,7 +23,7 @@ namespace NoobChain
             Data = data;
             PreviousHash = previousHash;
             TimeStamp = DateTime.UtcNow;
-            Nonce = rnd.Next();
+            Nonce = (uint)rnd.Next();
             Hash = GetHashString();
         }
         public override string ToString()

@@ -29,7 +29,7 @@ namespace NoobChain
         }
         static NoobChaiN()
         {
-            difficulty = 3;
+            difficulty = 5;
             settingDifficulty = false;
             Genesis = new Block("Genesis", Guid.NewGuid().ToString().ApplyBlacke2());
             //Genesis = new Block("Genesis", "0");
