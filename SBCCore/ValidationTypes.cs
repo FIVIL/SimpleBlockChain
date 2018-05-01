@@ -9,6 +9,13 @@ namespace NoobChain
         Valid,
         NotValidCurrent,
         NotValidPervious,
-        HasntMinedYet
+        HasntMinedYet,
+        TransactionSignatureIsInvalide,
+        TransactionInputsValueandOutputsValuearentEqual,
+        TransactionInputsisMissing,
+        TransactionInputsValueisInvalide,
+        WrongReciepient,
+        //change is left out value
+        ChangeSenderInvalide
     }
 }

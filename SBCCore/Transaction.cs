@@ -23,6 +23,11 @@ namespace NoobChain
             Value = value;
             Inputs = inputs;
         }
+        public Transaction(ECPublicKeyParameters from, ECPublicKeyParameters to, double value, List<TransactionInput> inputs,string id)
+            :this(from,to,value,inputs)
+        {
+            ID = id;
+        }
         private string GetHashString()
         {
             sequence++;
