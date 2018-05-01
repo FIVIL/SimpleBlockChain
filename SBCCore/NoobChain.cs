@@ -27,7 +27,7 @@ namespace NoobChain
                 else { }
             }
         }
-        public static Dictionary<string, Transaction.TransactionOutput> UTXOs { get; set; }
+        public static Dictionary<string, Transaction.TransactionOutput> UTXOs { get; private set; }
         static NoobChaiN()
         {
             difficulty = 5;
