@@ -65,7 +65,7 @@ namespace NoobChain
                 return retValue;
             }
         }
-        public bool ProcessTransaction()
+        public bool Process()
         {
             if (!IsSignatureVerified) return false;
             foreach (var item in Inputs)

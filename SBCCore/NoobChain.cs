@@ -31,9 +31,9 @@ namespace NoobChain
         private const int BlockSize = 50;
         static NoobChaiN()
         {
-            difficulty = 5;
+            difficulty = 3;
             settingDifficulty = false;
-            Genesis = new Block("Genesis", Guid.NewGuid().ToString().ApplyBlacke2());
+            Genesis = new Block(Guid.NewGuid().ToString().ApplyBlacke2());
             //Genesis = new Block("Genesis", "0");
             FirstBlockHash = Genesis.PreviousHash;
             Blocks = new List<Block>()
@@ -54,11 +54,11 @@ namespace NoobChain
 
         {
             Prev.Miner(Difficulty);
-            var block = new Block("Block number: " + (Blocks.Count), Prev.Hash);
+            var block = new Block(Prev.Hash);
             Blocks.Add(block);
             Prev = block;
         }
-        public static string ToString()
+        public static new string ToString()
         {
             StringBuilder sb = new StringBuilder("Blocks Lists:");
             sb.AppendLine();
