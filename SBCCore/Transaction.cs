@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace NoobChain
 {
@@ -40,10 +41,56 @@ namespace NoobChain
                 return data.VerifySignature(Sender, Signature);
             }
         }
+        public double InputsValue
+        {
+            get
+            {
+                double retValue = 0;
+                foreach (var item in Inputs)
+                {
+                    if (item.UTXO != null) retValue += item.UTXO.Value;
+                }
+                return retValue;
+            }
+        }
+        public double OutputsValue
+        {
+            get
+            {
+                double retValue = 0;
+                foreach (var item in Outputs)
+                {
+                    retValue += item.Value;
+                }
+                return retValue;
+            }
+        }
+        public bool ProcessTransaction()
+        {
+            if (!IsSignatureVerified) return false;
+            foreach (var item in Inputs)
+            {
+                item.UTXO = NoobChaiN.UTXOs[item.TransactionOutputId];
+            }
+            var LeftOver = InputsValue - Value;
+            ID = GetHashString();
+            Outputs.Add(new TransactionOutput(Reciepient, Value, ID));
+            Outputs.Add(new TransactionOutput(Sender, LeftOver, ID));
+            foreach (var item in Outputs)
+            {
+                NoobChaiN.UTXOs.Add(item.ID, item);
+            }
+            foreach (var item in Inputs)
+            {
+                if (item.UTXO != null)
+                    NoobChaiN.UTXOs.Remove(item.UTXO.ID);
+            }
+            return true;
+        }
         public class TransactionInput
         {
             public string TransactionOutputId { get; private set; }
-            public TransactionOutput UTXO { get; private set; }
+            public TransactionOutput UTXO { get; set; }
             public TransactionInput(string TOID)
             {
                 TransactionOutputId = TOID;
@@ -55,7 +102,7 @@ namespace NoobChain
             public ECPublicKeyParameters Reciepient { get; private set; }
             public double Value { get; private set; }
             public string ParentTransactionId { get; private set; }
-            public TransactionOutput(ECPublicKeyParameters reciepient, double value,string parentTransactionId)
+            public TransactionOutput(ECPublicKeyParameters reciepient, double value, string parentTransactionId)
             {
                 Reciepient = reciepient;
                 Value = value;

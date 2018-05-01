@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Text;
 using NoobChain;
+
 namespace SimpleBlockChain
 {
     class Program
-    {
+    {     
         static void Main(string[] args)
         {
             while (true)

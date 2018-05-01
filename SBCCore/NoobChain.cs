@@ -27,6 +27,7 @@ namespace NoobChain
                 else { }
             }
         }
+        public static Dictionary<string, Transaction.TransactionOutput> UTXOs { get; set; }
         static NoobChaiN()
         {
             difficulty = 5;
@@ -39,6 +40,7 @@ namespace NoobChain
                Genesis
             };
             Prev = Genesis;
+            UTXOs = new Dictionary<string, Transaction.TransactionOutput>();
         }
         public static void AddBlock(int count)
         {
