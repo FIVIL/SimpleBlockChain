@@ -28,6 +28,7 @@ namespace NoobChain
             }
         }
         public static Dictionary<string, Transaction.TransactionOutput> UTXOs { get; private set; }
+        private const int BlockSize = 50;
         static NoobChaiN()
         {
             difficulty = 5;
