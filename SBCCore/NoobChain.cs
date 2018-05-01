@@ -41,6 +41,7 @@ namespace NoobChain
                Genesis
             };
             Prev = Genesis;
+            Prev.Miner(difficulty);
             UTXOs = new Dictionary<string, Transaction.TransactionOutput>();
         }
         public static void AddBlock(int count)
@@ -53,10 +54,10 @@ namespace NoobChain
         private static void AddBlock()
 
         {
-            Prev.Miner(Difficulty);
             var block = new Block(Prev.Hash);
             Blocks.Add(block);
             Prev = block;
+            Prev.Miner(difficulty);
         }
         public static new string ToString()
         {
