@@ -11,8 +11,17 @@ using System.Linq;
 
 namespace NoobChain
 {
-    static class StringUtil
+    public static class StringUtil
     {
+        public static List<BlockModel> ToModle(this List<Block> b)
+        {
+            List<BlockModel> retValue = new List<BlockModel>();
+            foreach (var item in b)
+            {
+                retValue.Add(new BlockModel(item));
+            }
+            return retValue;
+        }
         public static string ApplyBlacke2(this string data)
         {
             var p = Blake2B.ComputeHash(System.Text.Encoding.UTF8.GetBytes(data));

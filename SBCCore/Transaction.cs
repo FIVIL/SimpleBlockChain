@@ -8,7 +8,7 @@ namespace NoobChain
 {
     public class Transaction
     {
-        public string ID { get; private set; }
+        public string ID { get; private set; } = "";
         public ECPublicKeyParameters Sender { get; private set; }
         public ECPublicKeyParameters Reciepient { get; private set; }
         public double Value { get; private set; }
@@ -22,6 +22,7 @@ namespace NoobChain
             Reciepient = to;
             Value = value;
             Inputs = inputs;
+            Outputs = new List<TransactionOutput>();
         }
         public Transaction(ECPublicKeyParameters from, ECPublicKeyParameters to, double value, List<TransactionInput> inputs,string id)
             :this(from,to,value,inputs)
@@ -72,6 +73,7 @@ namespace NoobChain
         }
         public bool Process()
         {
+            if (ID != string.Empty) return true;
             if (!IsSignatureVerified) return false;
             foreach (var item in Inputs)
             {
@@ -81,14 +83,14 @@ namespace NoobChain
             ID = GetHashString();
             Outputs.Add(new TransactionOutput(Reciepient, Value, ID));
             Outputs.Add(new TransactionOutput(Sender, LeftOver, ID));
-            foreach (var item in Outputs)
-            {
-                NoobChaiN.UTXOs.Add(item.ID, item);
-            }
             foreach (var item in Inputs)
             {
                 if (item.UTXO != null)
                     NoobChaiN.UTXOs.Remove(item.UTXO.ID);
+            }
+            foreach (var item in Outputs)
+            {
+                NoobChaiN.UTXOs.Add(item.ID, item);
             }
             return true;
         }

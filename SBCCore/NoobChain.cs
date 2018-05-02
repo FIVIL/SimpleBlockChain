@@ -29,11 +29,13 @@ namespace NoobChain
             }
         }
         public static Dictionary<string, Transaction.TransactionOutput> UTXOs { get; private set; }
-        private const int BlockSize = 1;
+        public static int BlockSize = 1;
         public static Wallet FirstWallet { get; private set; }
         private static List<Transaction> TempTransactions { get; set; }
         static NoobChaiN()
         {
+            UTXOs = new Dictionary<string, Transaction.TransactionOutput>();
+            TempTransactions = new List<Transaction>();
             difficulty = 3;
             settingDifficulty = false;
             var God = new Wallet();
@@ -44,16 +46,15 @@ namespace NoobChain
             GenesisTransaction.Outputs.Add(new Transaction.TransactionOutput(GenesisTransaction.Reciepient, GenesisTransaction.Value, GenesisTransaction.ID));
             UTXOs.Add(GenesisTransaction.Outputs[0].ID, GenesisTransaction.Outputs[0]);
             Genesis = new Block(Guid.NewGuid().ToString().ApplyBlacke2());
+            FirstBlockHash = Genesis.PreviousHash;
             Genesis.AddTransaction(GenesisTransaction);
             //Genesis = new Block("Genesis", "0");
-            FirstBlockHash = Genesis.PreviousHash;
             Blocks = new List<Block>()
             {
                Genesis
             };
             Prev = Genesis;
             Prev.Miner(difficulty);
-            UTXOs = new Dictionary<string, Transaction.TransactionOutput>();
         }
         public static void AddBlock(int count)
         {
@@ -63,21 +64,24 @@ namespace NoobChain
             }
         }
         private static void AddBlock()
-
         {
             var block = new Block(Prev.Hash);
             foreach (var item in TempTransactions)
             {
                 block.AddTransaction(item);
             }
+            block.Miner(difficulty);
             Blocks.Add(block);
             Prev = block;
-            Prev.Miner(difficulty);
             TempTransactions.Clear();
         }
         public static void SendFunds(Wallet Sender, Org.BouncyCastle.Crypto.Parameters.ECPublicKeyParameters Reciepient, double value)
         {
             var Tr = Sender.SendFunds(Reciepient, value);
+            if (Tr == null) return;
+            //needed because either way if wallet send new transaction withoud processing the prev one it 
+            //will use spended trans while it shoud use left out tran
+            //Tr.Process();
             TempTransactions.Add(Tr);
             if (TempTransactions.Count == BlockSize)
             {
@@ -101,7 +105,7 @@ namespace NoobChain
         }
         public static string ToJson()
         {
-            return JsonConvert.SerializeObject(Blocks);
+            return JsonConvert.SerializeObject(Blocks.ToModle());
         }
         public static ValidationTypes IsChainValid()
         {

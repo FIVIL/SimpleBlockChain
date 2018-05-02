@@ -39,7 +39,7 @@ namespace NoobChain
                 {
                     if (item.IsMine(PublicKey))
                     {
-                        UTXOs.Add(item.ID, item);
+                        if (!UTXOs.ContainsKey(item.ID)) UTXOs.Add(item.ID, item);
                         retValue += item.Value;
                     }
                 }
@@ -49,7 +49,8 @@ namespace NoobChain
         public Transaction SendFunds(ECPublicKeyParameters recipient, double value)
         {
             if (Balance < value)
-            { 
+            {
+                Console.WriteLine("Impossible!!");
                 return null;
             }
             var inputs = new List<Transaction.TransactionInput>();

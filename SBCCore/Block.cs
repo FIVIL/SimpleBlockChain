@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NoobChain
 {
-    class Block
+    public class Block
     {
         public string Hash { get; private set; }
         public string PreviousHash { get; private set; }
@@ -56,7 +56,10 @@ namespace NoobChain
             if (!PreviousHash.Equals(NoobChaiN.FirstBlockHash))
             {
                 if (!transaction.Process())
+                {
+                    Console.WriteLine("Wrong Transaction Aborted!");
                     return false;
+                }
             }
             Transactions.Add(transaction);
             return true;
