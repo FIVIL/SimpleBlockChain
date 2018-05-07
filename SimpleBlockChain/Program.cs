@@ -23,6 +23,7 @@ namespace SimpleBlockChain
                 else if (s.Equals("cw")) wallets.Add(new Wallet());
                 else if (s.Equals("bs")) NoobChaiN.BlockSize++;
                 else if (s.Equals("fm")) NoobChaiN.ForceMine();
+                else if (s.Equals("wt")) NoobChaiN.newGT();
                 else if (s.Equals("s"))
                 {
                     Console.WriteLine("Enter Sender Wallet Number:");

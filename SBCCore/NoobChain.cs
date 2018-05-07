@@ -56,6 +56,17 @@ namespace NoobChain
             Prev = Genesis;
             Prev.Miner(difficulty);
         }
+        public static void newGT()
+        {
+            var God = new Wallet();
+            var GT= new Transaction(God.PublicKey, FirstWallet.PublicKey, 100, null,
+                (Guid.NewGuid().ToString()).ApplyBlacke2());
+            GT.GenerateSignature(God.PrivateKey);
+            GT.Outputs.Add(new Transaction.TransactionOutput(GT.Reciepient, GT.Value, GT.ID));
+            UTXOs.Add(GT.Outputs[0].ID, GT.Outputs[0]);
+            TempTransactions.Add(GT);
+            ForceMine();
+        }
         public static void AddBlock(int count)
         {
             for (int i = 0; i < count; i++)
