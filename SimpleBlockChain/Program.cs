@@ -6,7 +6,7 @@ using NoobChain;
 namespace SimpleBlockChain
 {
     class Program
-    {     
+    {
         static void Main(string[] args)
         {
             var wallets = new List<Wallet>();
@@ -21,7 +21,7 @@ namespace SimpleBlockChain
                 else if (s.Equals("validation")) Console.WriteLine(NoobChaiN.IsChainValid());
                 else if (s.Equals("file")) System.IO.File.WriteAllText("result.json", NoobChaiN.ToJson());
                 else if (s.Equals("cw")) wallets.Add(new Wallet());
-                else if (s.Equals("bs")) NoobChaiN.BlockSize++ ;
+                else if (s.Equals("bs")) NoobChaiN.BlockSize++;
                 else if (s.Equals("s"))
                 {
                     Console.WriteLine("Enter Sender Wallet Number:");
@@ -36,7 +36,7 @@ namespace SimpleBlockChain
                 {
                     foreach (var item in wallets)
                     {
-                        Console.WriteLine(item.PublicKey.ToStringKey()+" : "+item.Balance);
+                        Console.WriteLine(item.PublicKey.ToStringKey() + " : " + item.Balance);
                     }
                 }
                 else Console.WriteLine("wrong Command");

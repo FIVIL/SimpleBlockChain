@@ -29,7 +29,7 @@ namespace NoobChain
             }
         }
         public static Dictionary<string, Transaction.TransactionOutput> UTXOs { get; private set; }
-        public static int BlockSize = 1;
+        public static int BlockSize = 2;
         public static Wallet FirstWallet { get; private set; }
         private static List<Transaction> TempTransactions { get; set; }
         static NoobChaiN()

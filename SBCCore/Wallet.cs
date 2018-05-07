@@ -39,8 +39,11 @@ namespace NoobChain
                 {
                     if (item.IsMine(PublicKey))
                     {
-                        if (!UTXOs.ContainsKey(item.ID)) UTXOs.Add(item.ID, item);
-                        retValue += item.Value;
+                        if (!UTXOs.ContainsKey(item.ID))
+                        {
+                            UTXOs.Add(item.ID, item);
+                            retValue += item.Value;
+                        }
                     }
                 }
                 return retValue;
