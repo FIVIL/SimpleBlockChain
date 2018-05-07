@@ -27,8 +27,8 @@ namespace NoobChain
             Inputs = inputs;
             Outputs = new List<TransactionOutput>();
         }
-        public Transaction(ECPublicKeyParameters from, ECPublicKeyParameters to, double value, List<TransactionInput> inputs,string id)
-            :this(from,to,value,inputs)
+        public Transaction(ECPublicKeyParameters from, ECPublicKeyParameters to, double value, List<TransactionInput> inputs, string id)
+            : this(from, to, value, inputs)
         {
             ID = id;
         }
@@ -93,6 +93,7 @@ namespace NoobChain
             }
             foreach (var item in Outputs)
             {
+                item.IsProcessing = false;
                 NoobChaiN.UTXOs.Add(item.ID, item);
             }
             return true;
@@ -112,16 +113,18 @@ namespace NoobChain
             public ECPublicKeyParameters Reciepient { get; private set; }
             public double Value { get; private set; }
             public string ParentTransactionId { get; private set; }
+            public bool IsProcessing { get; set; }
             public TransactionOutput(ECPublicKeyParameters reciepient, double value, string parentTransactionId)
             {
                 Reciepient = reciepient;
                 Value = value;
                 ParentTransactionId = parentTransactionId;
                 ID = (Reciepient.ToStringKey() + Value.ToString() + parentTransactionId).ApplyBlacke2();
+                IsProcessing = false;
             }
             public bool IsMine(ECPublicKeyParameters Key)
             {
-                return (Key == Reciepient);
+                return (Key == Reciepient) && !IsProcessing;
             }
         }
     }

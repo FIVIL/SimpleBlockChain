@@ -39,11 +39,8 @@ namespace NoobChain
                 {
                     if (item.IsMine(PublicKey))
                     {
-                        if (!UTXOs.ContainsKey(item.ID))
-                        {
-                            UTXOs.Add(item.ID, item);
-                            retValue += item.Value;
-                        }
+                        if (!UTXOs.ContainsKey(item.ID)) UTXOs.Add(item.ID, item);
+                            retValue += item.Value;                    
                     }
                 }
                 return retValue;
@@ -63,6 +60,7 @@ namespace NoobChain
             {
                 total += item.Value;
                 inputs.Add(new Transaction.TransactionInput(item.ID));
+                item.IsProcessing = true;
                 if (total > value) break;
             }
 

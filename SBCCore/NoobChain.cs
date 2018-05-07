@@ -75,6 +75,10 @@ namespace NoobChain
             Prev = block;
             TempTransactions.Clear();
         }
+        public static void ForceMine()
+        {
+            AddBlock();
+        }
         public static void SendFunds(Wallet Sender, Org.BouncyCastle.Crypto.Parameters.ECPublicKeyParameters Reciepient, double value)
         {
             var Tr = Sender.SendFunds(Reciepient, value);
