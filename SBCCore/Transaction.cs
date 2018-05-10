@@ -76,8 +76,9 @@ namespace NoobChain
         }
         public bool Process()
         {
-            if (ID != string.Empty) return true;
+            //if (ID != string.Empty) return true;
             if (!IsSignatureVerified) return false;
+            if (Inputs == null) return false;
             foreach (var item in Inputs)
             {
                 item.UTXO = NoobChaiN.UTXOs[item.TransactionOutputId];
